@@ -1,3 +1,5 @@
+pip install pygame
+
 import streamlit as st
 import pygame
 import os
