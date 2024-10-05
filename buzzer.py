@@ -1,19 +1,23 @@
+import streamlit as st
 import pygame
-import time
+import os
 
 # Initialize Pygame
-pygame.init()
+pygame.mixer.init()
 
-# Set up the sound
-buzzer_sound = pygame.mixer.Sound("buzzer.wav")
+# Load the buzzer sound file
+buzzer_sound_path = "buzzer.wav"
+if os.path.exists(buzzer_sound_path):
+    buzzer_sound = pygame.mixer.Sound(buzzer_sound_path)
+else:
+    st.error("Buzzer sound file not found. Please ensure 'buzzer.wav' is in the same directory.")
 
 # Function to play the buzzer sound
 def play_buzzer():
     buzzer_sound.play()
-    time.sleep(1)  # Play sound for 1 second
-    buzzer_sound.stop()
 
-if __name__ == "__main__":
-    # Load the buzzer sound file
+# Streamlit UI
+st.title("Buzzer App")
+if st.button("Press to Sound the Buzzer"):
     play_buzzer()
-    pygame.quit()
+    st.success("Buzzer sounded!")
